@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    
+    <script type="text/javascript" src='jquery.min.js'></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+        if(!("WebSocket" in window)) {
+          alert("Sorry, the build of your browser does not support WebSockets. Please use latest Chrome or Webkit nightly");
+          return;
+        }
+
+        ws = new WebSocket("ws://localhost:8080/");
+        
+        ws.onmessage = function(evt) { 
+          var p = $("<div class='tweet' style='display:none'>" + evt.data + "</div>");
+          if($('#tweets div.tweet').size() > 15) {
+            $('#tweets div.tweet:last').slideDown(100, function() {
+              $(this).remove();
+            });
+          }
+          $('#tweets').prepend(p);
+          p.slideDown(140);
+        };
+        
+        ws.onclose = function() {
+          alert("socket closed");
+        };
+        ws.onopen = function() {
+          alert("connected...");
+        };
+      });
+    </script>
+  </head>
+
+
+  <body>
+    <div id="tweets"></div>
+  </body>
+
+</html>

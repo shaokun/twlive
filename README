@@ -1,0 +1,19 @@
+h1. About
+
+An server-client example of using Twitter Stream API and WebSocket.
+
+
+h1. Requirement
+
+* Safari 4.x
+* Chrome
+
+
+h1. How to use
+
+0) pico server.rb
+   change USERNAME, PASSWORD to your twitter account
+1) ruby server.rb
+3) open client.html through Safari 4.x or Chrome, you should see tweets flow into your browser.
+4) if you like, you could change the keyword from 'iphone' to others.
+filter_url = 'http://stream.twitter.com/1/statuses/filter.json?track=iphone'
